@@ -6,39 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 </head>
 <body>
-    <h1>Meat Calculator</h1>
+    <div class="container"> 
+        <h1>Meat Calculator</h1>
 
-    <label for="cooked-meat">Cooked meat per meal (oz):</label>
-    <input type="number" id="cooked-meat" name="cooked-meat"><br><br>
+        <p>This calculator helps you determine how much raw meat you need to cook to achieve your desired amount of cooked meat, taking into account shrinkage during cooking.</p>
 
-    <label for="num-meals">Number of meals:</label>
-    <input type="number" id="num-meals" name="num-meals"><br><br>
+        <h2>Instructions:</h2>
+        <ol>
+            <li>Enter the amount of cooked meat you want per meal (in ounces).</li>
+            <li>Enter the number of meals you want to prepare.</li>
+            <li>Select the type of meat from the dropdown menu.</li>
+            <li>If you select a ground meat, enter the fat percentage.</li>
+            <li>Select your cooking method.</li>
+            <li>Click "Calculate" to see the results.</li>
+        </ol>
 
-    <label for="meat-type">Meat type:</label>
-    <select id="meat-type" name="meat-type">
-        <option value="ground beef">Ground Beef</option>
-        <option value="ground chicken">Ground Chicken</option>
-        <option value="ground turkey">Ground Turkey</option>
-        <option value="chicken breast">Chicken Breast</option>
-        <option value="chicken thighs">Chicken Thighs</option>
-    </select><br><br>
+        <label for="cooked-meat">Cooked meat per meal (oz):</label>
+        <input type="number" id="cooked-meat" name="cooked-meat"><br><br>
 
-    <div id="fat-percentage-container">
-        <label for="fat-percentage">Fat percentage:</label>
-        <input type="number" id="fat-percentage" name="fat-percentage"><br><br>
-    </div>
+        <label for="num-meals">Number of meals:</label>
+        <input type="number" id="num-meals" name="num-meals"><br><br>
 
-    <label for="cooking-method">Cooking method:</label>
-    <select id="cooking-method" name="cooking-method">
-        <option value="pan-frying">Pan-frying</option>
-        <option value="grilling">Grilling</option>
-        <option value="baking">Baking</option>
-        <option value="broiling">Broiling</option>
-    </select><br><br>
+        <label for="meat-type">Meat type:</label>
+        <select id="meat-type" name="meat-type">
+            <option value="ground beef">Ground Beef</option>
+            <option value="ground chicken">Ground Chicken</option>
+            <option value="ground turkey">Ground Turkey</option>
+            <option value="chicken breast">Chicken Breast</option>
+            <option value="chicken thighs">Chicken Thighs</option>
+        </select><br><br>
 
-    <button onclick="calculate()">Calculate</button>
+        <div id="fat-percentage-container">
+            <label for="fat-percentage">Fat percentage:</label>
+            <input type="number" id="fat-percentage" name="fat-percentage"><br><br>
+        </div>
 
-    <div id="result"></div>
+        <label for="cooking-method">Cooking method:</label>
+        <select id="cooking-method" name="cooking-method">
+            <option value="pan-frying">Pan-frying</option>
+            <option value="grilling">Grilling</option>
+            <option value="baking">Baking</option>
+            <option value="broiling">Broiling</option>
+        </select><br><br>
+
+        <button onclick="calculate()">Calculate</button>
+
+        <div id="result"></div>
+    </div> 
 
     <script src="script.js"></script>
 </body>
