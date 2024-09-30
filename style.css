@@ -1,0 +1,9 @@
+/* Basic styling, you can customize this further */
+body {
+    font-family: sans-serif;
+    text-align: center;
+}
+
+#fat-percentage-container {
+    display: none; /* Initially hidden */
+}

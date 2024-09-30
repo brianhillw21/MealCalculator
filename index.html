@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Meat Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Meat Calculator</h1>
+
+    <label for="cooked-meat">Cooked meat per meal (oz):</label>
+    <input type="number" id="cooked-meat" name="cooked-meat"><br><br>
+
+    <label for="num-meals">Number of meals:</label>
+    <input type="number" id="num-meals" name="num-meals"><br><br>
+
+    <label for="meat-type">Meat type:</label>
+    <select id="meat-type" name="meat-type">
+        <option value="ground beef">Ground Beef</option>
+        <option value="ground chicken">Ground Chicken</option>
+        <option value="ground turkey">Ground Turkey</option>
+        <option value="chicken breast">Chicken Breast</option>
+        <option value="chicken thighs">Chicken Thighs</option>
+    </select><br><br>
+
+    <div id="fat-percentage-container">
+        <label for="fat-percentage">Fat percentage:</label>
+        <input type="number" id="fat-percentage" name="fat-percentage"><br><br>
+    </div>
+
+    <label for="cooking-method">Cooking method:</label>
+    <select id="cooking-method" name="cooking-method">
+        <option value="pan-frying">Pan-frying</option>
+        <option value="grilling">Grilling</option>
+        <option value="baking">Baking</option>
+        <option value="broiling">Broiling</option>
+    </select><br><br>
+
+    <button onclick="calculate()">Calculate</button>
+
+    <div id="result"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
