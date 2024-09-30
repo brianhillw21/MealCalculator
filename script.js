@@ -40,7 +40,12 @@ function calculate() {
     const numMeals = parseInt(document.getElementById("num-meals").value);
     const meatType = document.getElementById("meat-type").value;
     const cookingMethod = document.getElementById("cooking-method").value;
-    const fatPercentage = parseFloat(document.getElementById("fat-percentage").value) / 100 || 0; // Default to 0 if not entered
+    let fatPercentage = 0; // Initialize fatPercentage
+
+    // Check if fat percentage field exists before accessing its value
+    if (document.getElementById("fat-percentage")) {
+        fatPercentage = parseFloat(document.getElementById("fat-percentage").value) / 100 || 0; // Default to 0 if not entered
+    }
 
     try {
         if (!meatTypes[meatType]) {
@@ -77,3 +82,13 @@ function calculate() {
             - Protein: ${proteinPerMeal.toFixed(2)}g<br>
             - Fat: ${fatPerMeal.toFixed(2)}g<br>
             - Carbs: ${carbsPerMeal.toFixed(2)}g
+        `;
+
+    } catch (error) {
+        document.getElementById("result").innerHTML = `Error: ${error.message}`;
+    }
+}
+
+// Initial setup
+updateFatPercentageVisibility(); 
+document.getElementById("meat-type").addEventListener('change', updateFatPercentageVisibility);
