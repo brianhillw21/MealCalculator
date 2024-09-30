@@ -15,7 +15,14 @@ const cookingMethods = {
 
 // Placeholder for nutritional data (replace with actual API/database calls)
 function getNutritionalInfo(meatType) {
-    return { calories: 200, protein: 25, fat: 10, carbs: 0, reference_amount: 100 }; 
+    // This is a placeholder, replace with your actual implementation
+    return {
+        calories: 200,       // Calories per 100g (or your reference amount)
+        protein: 25,         // Protein in grams per 100g
+        fat: 10,            // Fat in grams per 100g
+        carbs: 0,           // Carbs in grams per 100g
+        reference_amount: 100 // The amount in grams to which the nutritional values refer (e.g., 100g)
+    }; 
 }
 
 function updateFatPercentageVisibility() {
@@ -24,14 +31,49 @@ function updateFatPercentageVisibility() {
     if (meatType.includes("ground")) {
         fatPercentageContainer.style.display = "block";
     } else {
-        fatPercentageContainer.style.display = "none"; // Corrected line
+        fatPercentageContainer.style.display = "none"; 
     }
 }
 
 function calculate() {
-    // ... (rest of the code remains the same)
-}
+    const cookedMeatPerMeal = parseFloat(document.getElementById("cooked-meat").value);
+    const numMeals = parseInt(document.getElementById("num-meals").value);
+    const meatType = document.getElementById("meat-type").value;
+    const cookingMethod = document.getElementById("cooking-method").value;
+    const fatPercentage = parseFloat(document.getElementById("fat-percentage").value) / 100 || 0; // Default to 0 if not entered
 
-// Initial setup
-updateFatPercentageVisibility(); 
-document.getElementById("meat-type").addEventListener('change', updateFatPercentageVisibility);
+    try {
+        if (!meatTypes[meatType]) {
+            throw new Error("Invalid meat type");
+        }
+        if (!cookingMethods[cookingMethod]) {
+            throw new Error("Invalid cooking method");
+        }
+
+        let shrinkage = meatTypes[meatType].shrinkage;
+        if (meatType.includes("ground")) {
+            shrinkage *= (1 + 0.1 * fatPercentage);
+        }
+        shrinkage *= cookingMethods[cookingMethod];
+
+        const totalCookedMeat = cookedMeatPerMeal * numMeals;
+        const uncookedMeat = totalCookedMeat / (1 - shrinkage);
+
+        const nutritionalInfo = getNutritionalInfo(meatType);
+        const referenceAmountGrams = nutritionalInfo.reference_amount || 100;
+
+        // Calculate macros per meal (adjusting for reference amount)
+        const caloriesPerMeal = (nutritionalInfo.calories * cookedMeatPerMeal * 28.35) / referenceAmountGrams;
+        const proteinPerMeal = (nutritionalInfo.protein * cookedMeatPerMeal * 28.35) / referenceAmountGrams;
+        const fatPerMeal = (nutritionalInfo.fat * cookedMeatPerMeal * 28.35) / referenceAmountGrams;
+        const carbsPerMeal = (nutritionalInfo.carbs * cookedMeatPerMeal * 28.35) / referenceAmountGrams;
+
+        const resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = `
+            You need approximately ${uncookedMeat.toFixed(2)} ounces of uncooked ${meatType} to prepare ${numMeals} meals.
+
+            Per Meal (${cookedMeatPerMeal.toFixed(2)} oz):<br>
+            - Calories: ${caloriesPerMeal.toFixed(2)}<br>
+            - Protein: ${proteinPerMeal.toFixed(2)}g<br>
+            - Fat: ${fatPerMeal.toFixed(2)}g<br>
+            - Carbs: ${carbsPerMeal.toFixed(2)}g
